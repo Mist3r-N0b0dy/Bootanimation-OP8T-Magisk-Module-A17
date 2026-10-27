@@ -1,0 +1,23 @@
+ui_print "- BootAnimation NetHunter v1.0.0 (A17)"
+ui_print "- /product/media/bootanimation.zip"
+ui_print "- .real patché + part0/audio.wav"
+# Signature, imprimée en dernier : Magisk affiche "- Done" dès que
+# customize.sh rend la main. ASCII 7 bits, 41 colonnes max (journal Magisk),
+# ni antislash ni guillemet pour ne rien avoir à échapper dans ui_print.
+ui_print "#    #  ###    ####  ######  ####  #####"
+ui_print "##  ##   #    #    #   ##   #    # #    #"
+ui_print "# ## #   #    #        ##        # #    #"
+ui_print "#    #   #     ####    ##     ###  #####"
+ui_print "#    #   #         #   ##        # #  #"
+ui_print "#    #   #    #    #   ##        # #   #"
+ui_print "#    #  ###    ####    ##    ####  #    #"
+ui_print " "
+ui_print "#    #  ####  #####   ####  #####  #    #"
+ui_print "##   # #    # #    # #    # #    # #    #"
+ui_print "# #  # #   ## #    # #   ## #    # #    #"
+ui_print "#  # # #  # # #####  #  # # #    #  #  #"
+ui_print "#   ## # #  # #    # # #  # #    #   ##"
+ui_print "#    # ##   # #    # ##   # #    #   ##"
+ui_print "#    #  ####  #####   ####  #####    ##"
+ui_print " "
+ui_print "- Redémarre pour voir l'animation."

@@ -1,0 +1,38 @@
+#!/system/bin/sh
+# ================================================================
+#  BootAnimation NetHunter OP8T + SON - enveloppe (uid 1003 graphics)
+#
+#  Pourquoi un aide root :
+#   - le service 'bootanim' tourne en uid 1003 (bootanim.rc: user graphics) ;
+#   - audioplay::create() attend le service binder "audio" (= AudioService,
+#     publie par system_server vers 13 s) alors que bootanim demarre a 7,2 s ;
+#   - et AudioFlinger refuse les pistes d'un uid sans paquet avant que
+#     system_server ait rempli le controleur d'attribution ("controller never
+#     populated by system_server" -> createTrack status -38).
+#  => animation ET son joues par un AIDE ROOT (uid 0 = trusted client pour
+#     AudioFlinger), lance depuis post-fs-data.sh.
+#  => cette enveloppe garde le service 'bootanim' en vie pour SurfaceFlinger.
+# ================================================================
+D=/data/local/bootanim8
+BA=/system/bin/bootanimation.real
+
+log -t bootanim8 "WRAP uid=$(id -u): demarrage"
+
+i=0
+while [ $i -lt 40 ]; do
+  [ -f $D/helper-pid ] && break
+  sleep 0.2; i=$((i+1))
+done
+
+if [ -f $D/helper-pid ]; then
+  log -t bootanim8 "WRAP: aide root presente -> attente de la fin de l'animation"
+  i=0
+  while [ $i -lt 125 ]; do
+    [ -f $D/helper-done ] && break
+    sleep 0.2; i=$((i+1))
+  done
+  log -t bootanim8 "WRAP: fin (done=$([ -f $D/helper-done ] && echo oui || echo non))"
+else
+  log -t bootanim8 "WRAP: aucun aide root -> animation directe (sans son)"
+  exec $BA
+fi

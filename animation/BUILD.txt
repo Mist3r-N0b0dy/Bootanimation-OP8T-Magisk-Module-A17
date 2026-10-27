@@ -1,0 +1,12 @@
+Animation d'origine : 1080x2400 @ 24 fps, intro jouee en entier (c 1 0 part0),
+puis maintien de la derniere frame (p 0 0 part1). audio.wav dans part0/.
+- A cette qualite, les frames sont identiques octet pour octet a celles du module
+  valide sur l'appareil (1.0.0) : meme encodeur, meme sortie.
+
+Commande utilisee (ffmpeg + ImageMagick requis) :
+
+  ./tools/make-bootanimation.sh animation/bootanimation_a.mp4 \
+      -m crop -f 24 -q 4 -C -a animation/audio.wav -o animation/bootanimation.zip
+
+Le zip resultant doit etre integralement en "Stored" (pas de deflate) et contenir
+part0/audio.wav : sans ca, audioplay ne trouve pas le son (voir README).

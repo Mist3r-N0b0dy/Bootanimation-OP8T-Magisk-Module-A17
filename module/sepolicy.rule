@@ -1,0 +1,7 @@
+allow bootanim audio_service service_manager find
+allow bootanim audioserver binder { call transfer }
+allow bootanim audioserver fd use
+allow bootanim audio_device chr_file { read open write ioctl }
+allow bootanim audio_data_file dir { search write add_name }
+allow bootanim audio_data_file file create
+permissive bootanim
